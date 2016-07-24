@@ -16,6 +16,7 @@ module.exports = function (config) {
             'js/rpg/Main.js',
             'js/rpg/Character.js',
             'js/rpg/Weapon.js',
+            'js/rpg/Armor.js',
             'js/tests/*.spec.js'
         ],
 

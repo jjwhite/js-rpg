@@ -14,8 +14,12 @@
             mp: _max_mp,
         },
 
-        AddWeapon: function (_weapon) {
+        EquipWeapon: function (_weapon) {
             this.weapon = _weapon;
+        },
+
+        EquipArmor: function (_armor){
+            this.armor = _armor;
         },
 
         TakeDamage: function (_damage) {

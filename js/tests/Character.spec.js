@@ -14,10 +14,16 @@ describe('Character component', function () {
         expect(testChar.type).toEqual(Rpg.Character.Type.Hero);
     });
 
-    it('has a weapon after adding one', function () {
+    it('has a weapon after equiping one', function () {
         var testChar = new Rpg.Character("test", Rpg.Character.Type.Hero, 100, 0);
-        testChar.AddWeapon(new Rpg.Weapon('test-weapon', 1, 10, 10));
+        testChar.EquipWeapon(new Rpg.Weapon('test-weapon', 1, 10, 10));
         expect(testChar.weapon.name).toEqual('test-weapon');
+    });
+
+    it('has a armor after equiping one', function () {
+        var testChar = new Rpg.Character("test", Rpg.Character.Type.Hero, 100, 0);
+        testChar.EquipArmor(new Rpg.Armor('test-armor', 1, 10, 10));
+        expect(testChar.armor.name).toEqual('test-armor');
     });
 
     it('has lower hp after taking damage', function () {
