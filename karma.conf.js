@@ -18,6 +18,8 @@ module.exports = function (config) {
             'js/rpg/Character.js',
             'js/rpg/Weapon.js',
             'js/rpg/Armor.js',
+            'js/rpg/Party.js',
+            'js/rpg/battle.js',
             'js/tests/*.spec.js'
         ],
 

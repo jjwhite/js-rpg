@@ -9,5 +9,4 @@ describe('Helpers', function () {
         expect(lookupItem(testArray, 'a')).toEqual(obj1);
     });
 
-
 });
