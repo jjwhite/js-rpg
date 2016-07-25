@@ -2,8 +2,6 @@
 
 describe('Character component', function () {
 
-    
-
     it('is named test', function () {
         var testChar = new Rpg.Character("test", Rpg.Character.Type.Hero, 100, 0);
         expect(testChar.name).toEqual("test");
@@ -44,10 +42,11 @@ describe('Character component', function () {
         expect(testChar.status.life_status).toEqual(Rpg.Character.Life_Status.Dead);
     });
 
-    //it('has item in inventory when added', function () {
-    //    var testChar = new Rpg.Character("test", Rpg.Character.Type.Enemy, 100, 0);
-    //    testChar.AddToInventory(new Rpg.Weapon('test-inventory-weapon', 1, 10, 10));
-    //    expect(testChar.inventory)
-    //});
+    it('has item in inventory when added', function () {
+        var testChar = new Rpg.Character("test", Rpg.Character.Type.Enemy, 100, 0);
+        var weapon = new Rpg.Weapon('test-inventory-weapon', 1, 10, 10);
+        testChar.AddToInventory(weapon);
+        expect(lookupItem(testChar.inventory, 'test-inventory-weapon')).toEqual(weapon);
+    });
 
 });

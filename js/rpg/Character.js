@@ -14,6 +14,7 @@
             mp: _max_mp,
         },
 
+        // public methods
         EquipWeapon: function (_weapon) {
             this.weapon = _weapon;
         },
@@ -33,6 +34,7 @@
 
     }
 
+    //private methods
     var CheckLifeStatus = function () {
         if (Public.status.hp <= 0) {
             Public.status.hp = 0;
