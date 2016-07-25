@@ -6,6 +6,7 @@
         type: _type,
         max_hp: _max_hp !== null ? _max_hp : 0, // neutral npc
         max_mp: _max_mp !== null ? _max_mp : 0, // neutral 
+        inventory:[],
 
         // mutable status properties
         status: {
@@ -20,6 +21,10 @@
 
         EquipArmor: function (_armor){
             this.armor = _armor;
+        },
+
+        AddToInventory: function(item){
+            this.inventory.push(item);
         },
 
         TakeDamage: function (_damage) {

@@ -44,4 +44,10 @@ describe('Character component', function () {
         expect(testChar.status.life_status).toEqual(Rpg.Character.Life_Status.Dead);
     });
 
+    //it('has item in inventory when added', function () {
+    //    var testChar = new Rpg.Character("test", Rpg.Character.Type.Enemy, 100, 0);
+    //    testChar.AddToInventory(new Rpg.Weapon('test-inventory-weapon', 1, 10, 10));
+    //    expect(testChar.inventory)
+    //});
+
 });

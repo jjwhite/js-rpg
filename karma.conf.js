@@ -14,6 +14,7 @@ module.exports = function (config) {
         files: [
             'https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js',
             'js/rpg/Main.js',
+            'js/utility/Helpers.js',
             'js/rpg/Character.js',
             'js/rpg/Weapon.js',
             'js/rpg/Armor.js',
