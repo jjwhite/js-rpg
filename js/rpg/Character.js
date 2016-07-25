@@ -1,6 +1,5 @@
 ﻿Rpg.Character = function (_name, _type, _max_hp, _max_mp) {
-    var self = this;
-
+    
     var Public = {
         name: _name,
         type: _type,
