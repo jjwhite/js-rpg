@@ -6,7 +6,8 @@
         max_hp: _max_hp !== null ? _max_hp : 0, // neutral npc
         max_mp: _max_mp !== null ? _max_mp : 0, // neutral 
         stamina: 1,
-        inventory:[],
+        inventory: [],
+        spells: [],
 
         // mutable status properties
         status: {
@@ -26,6 +27,10 @@
 
         AddToInventory: function(item){
             this.inventory.push(item);
+        },
+
+        AddSpell: function(spell){
+            this.spells.push(spell);
         },
 
         TakeDamage: function (_damage) {
