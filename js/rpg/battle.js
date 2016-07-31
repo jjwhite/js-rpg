@@ -79,7 +79,7 @@
     }
 
     var FinishBattle = function () {
-
+        //TODO
     }
 
     Init();

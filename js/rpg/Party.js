@@ -7,7 +7,7 @@
         },
 
         remove: function (_character) {
-
+            characters.pop(_character);
         }
     }
 
