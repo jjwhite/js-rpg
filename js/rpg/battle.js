@@ -1,13 +1,14 @@
-﻿Rpg.Battle = function (_heroParty, _enemyParty) {
-    
+﻿Rpg.Battle = function (_heroParty, _enemyParty, _isTestMode) {
+
     var Public = {
         heroParty: _heroParty,
         enemyParty: _enemyParty,
         queue: [],
         targets: [],
         status: Rpg.Battle.Status.InProgress,
+        isTestMode: _isTestMode || false,
 
-        next: function(){
+        next: function () {
             MoveNext();
         },
 
@@ -44,18 +45,54 @@
     }
 
     var Attack = function () {
-        var dmg = Public.activeChar.weapon.damage;
+        var dmg = Public.isTestMode ? Public.activeChar.weapon.damage : GetDamage(GetDamageFactor(), Public.activeChar.weapon.damage);
         for (x = 0; x < Public.targets.length; x++) {
             Public.targets[x].TakeDamage(dmg);
         }
     }
 
     var CastSpell = function () {
-      //TODO
+        var ac = Public.activeChar;
+        var as = ac.activeSpell;
+
+
+        switch (as.type) {
+            case Rpg.Spell.Type.Damage:
+                var dmg = Public.isTestMode ? as.rating : GetDamage(GetDamageFactor(), as.rating);
+                for (x = 0; x < Public.targets.length; x++) {
+                    Public.targets[x].TakeDamage(dmg);
+                }
+                return;
+            case Rpg.Spell.Type.Healing:
+                var healing = as.rating;
+                //calculate across all targets
+                var heal_val = healing / Public.targets.length;
+                for (x = 0; x < Public.targets.length; x++) {
+                    Public.targets[x].Heal(heal_val);
+                }
+                return;
+        }
+
+        ac.RemoveMP(ac.RemoveMP(as.cost))
+
+
     }
-    
-    var CheckStatus = function(){
-        
+
+    var GetDamage = function (_dmgFactor, _maxDmg) {
+        if (_dmgFactor == 1)
+            return _maxDmg * 1.5; //critical hit
+
+        return _dmgFactor * _maxDmg;
+    }
+
+    var GetDamageFactor = function () {
+        //eventually take into account item properties but for now just random
+        return rdm = 0.1 * getRandomIntInclusive(0, 10);
+
+    }
+
+    var CheckStatus = function () {
+
         var heroesAlive = false;
         var enemiesAlive = false;
 
@@ -83,7 +120,15 @@
     }
 
     Init();
+
+    /* Expose private methods for testing */
+    if (Public.isTestMode) {
+        Public.GetDamage = GetDamage;
+    }
+    /* End testing code */
+
     return Public;
+
 }
 
 Rpg.Battle.ActionType = {

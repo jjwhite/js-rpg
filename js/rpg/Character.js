@@ -33,10 +33,26 @@
             this.spells.push(spell);
         },
 
+        EquipSpell: function (_spell){
+            this.activeSpell = _spell;
+        },
+
         TakeDamage: function (_damage) {
             this.status.hp -= _damage;
             CheckLifeStatus();
+        },
+
+        Heal: function (_value) {
+            this.status.hp += _value;
+            if (this.status.hp > this.max_hp) {
+                this.status.hp = this.max_hp;
+            }
+        },
+
+        RemoveMP: function (_value) {
+            this.status.mp -= _value;
         }
+
 
     }
 

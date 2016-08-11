@@ -30,6 +30,20 @@ describe('Character component', function () {
         expect(testChar.status.hp).toEqual(50);
     });
 
+    it('has higher hp after healing', function () {
+        var testChar = new Rpg.Character("test", Rpg.Character.Type.Hero, 100, 0);
+        testChar.TakeDamage(50);
+        testChar.Heal(20);
+        expect(testChar.status.hp).toEqual(70);
+    });
+
+    it('cannot be healed beyond maxHP', function(){
+        var testChar = new Rpg.Character("test", Rpg.Character.Type.Hero, 100, 0);
+        testChar.TakeDamage(50);
+        testChar.Heal(100);
+        expect(testChar.status.hp).toEqual(100);
+    });
+
     it('Hero is KOed after taking too much damage', function(){
         var testChar = new Rpg.Character("test", Rpg.Character.Type.Hero, 100, 0);
         testChar.TakeDamage(100);

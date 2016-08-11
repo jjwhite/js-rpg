@@ -23,11 +23,12 @@ describe('Battle', function () {
 
          heroParty.characters.forEach(addWeapons);
          enemyParty.characters.forEach(addWeapons);
-        testBattle = new Rpg.Battle(heroParty, enemyParty);
+        testBattle = new Rpg.Battle(heroParty, enemyParty, true);
 
         function addWeapons(char) {
             char.EquipWeapon(new Rpg.Weapon('test', 0, 10, 10));
         }
+        
     })
 
     it('does create queue', function () {
@@ -44,6 +45,21 @@ describe('Battle', function () {
         expect(testBattle.activeChar == testBattle.queue[testBattle.queue.length -1]).toEqual(true);
     })
 
+    it('does zero damage when damage factor is zero', function () {
+        testBattle.next();
+        expect(testBattle.GetDamage(0, 10)).toEqual(0);
+    })
+
+    it('does 1.5x damage when damage factor is 1', function () {
+        testBattle.next();
+        expect(testBattle.GetDamage(1, 10)).toEqual(15);
+    })
+
+    it('does percentage damage when damage factor is in the middle', function () {
+        testBattle.next();
+        expect(testBattle.GetDamage(0.5, 10)).toEqual(5);
+    })
+
     it('does damage to targets when attacked', function () {
         
         testBattle.targets = enemyParty.characters;
@@ -54,6 +70,25 @@ describe('Battle', function () {
         expect(testBattle.enemyParty.characters[0].status.hp == 0).toEqual(true);
       
     })
+
+    it ('does damage to targets when damage spell is cast', function(){
+        testBattle.targets = enemyParty.characters;
+        testBattle.next();
+
+        testBattle.activeChar.EquipSpell(new Rpg.Spell(
+                'Test Fire Spell',
+                Rpg.Spell.Type.Damage,
+                Rpg.Spell.Category.Fire,
+                10,
+                0
+            ));
+
+        testBattle.act(Rpg.Battle.ActionType.Spell);
+        expect(testBattle.enemyParty.characters[0].status.hp == 0).toEqual(true);
+
+    })
+
+
 
     it('ends battle in victory when all enemies are dead', function(){
         testBattle.targets = enemyParty.characters;
