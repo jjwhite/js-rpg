@@ -88,6 +88,29 @@ describe('Battle', function () {
 
     })
 
+    it('heals targets when healing spell is cast', function () {
+        testBattle.targets = heroParty.characters;
+        testBattle.next();
+
+        //do 5 damage to each before healing
+        testBattle.heroParty.characters.forEach(doDamage);
+
+        testBattle.activeChar.EquipSpell(new Rpg.Spell(
+               'Test Healing Spell',
+               Rpg.Spell.Type.Healing,
+               Rpg.Spell.Category.Healing,
+               10,
+               0
+           ));
+
+        testBattle.act(Rpg.Battle.ActionType.Spell);
+        expect(testBattle.heroParty.characters[0].status.hp).toEqual(7.5)
+
+        function doDamage(char) {
+            char.TakeDamage(5);
+        }
+
+    });
 
 
     it('ends battle in victory when all enemies are dead', function(){

@@ -20,9 +20,7 @@
                 case Rpg.Battle.ActionType.Spell:
                     CastSpell();
                     break;
-
             }
-
             MoveNext();
         }
 
@@ -74,7 +72,6 @@
         }
 
         ac.RemoveMP(ac.RemoveMP(as.cost))
-
 
     }
 
@@ -141,5 +138,6 @@ Rpg.Battle.ActionType = {
 Rpg.Battle.Status = {
     InProgress: 0,
     Victory: 1,
-    Defeat: 2
+    Defeat: 2,
+    Flee: 3
 }

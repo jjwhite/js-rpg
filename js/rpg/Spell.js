@@ -20,5 +20,6 @@ Rpg.Spell.Category = {
     Fire: 0,
     Ice: 1,
     Wind: 2,
-    Water: 3
+    Water: 3,
+    Healing: 4
 }
